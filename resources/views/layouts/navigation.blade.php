@@ -2,6 +2,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
             <div class="flex">
+                <!-- Logo / Brand -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}" class="flex items-center gap-2.5">
                         <span class="p-2 bg-sky-100 rounded-xl text-xl shadow-xs">🐾</span>
@@ -9,10 +10,17 @@
                     </a>
                 </div>
 
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" class="text-xs font-bold uppercase tracking-wider">
-                        {{ __('Dashboard') }}
-                    </x-nav-link>
+                <!-- Navigation Links -->
+                <div class="hidden space-x-6 sm:-my-px sm:ms-10 sm:flex items-center">
+                    @if(request()->routeIs('dashboard'))
+                        <button onclick="document.getElementById('paket-layanan').scrollIntoView({ behavior: 'smooth' })" class="inline-flex items-center px-1 pt-1 text-xs font-bold uppercase tracking-wider text-gray-600 hover:text-sky-600 transition cursor-pointer">
+                            Booking
+                        </button>
+
+                        <button onclick="document.getElementById('riwayat-pesanan').scrollIntoView({ behavior: 'smooth' })" class="inline-flex items-center px-1 pt-1 text-xs font-bold uppercase tracking-wider text-gray-600 hover:text-sky-600 transition cursor-pointer">
+                            Pesanan Saya
+                        </button>
+                    @endif
                     
                     @if(Auth::user()->usertype == 'admin' || Auth::user()->username == 'admin')
                         <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')" class="text-xs font-bold uppercase tracking-wider text-sky-600">
@@ -22,6 +30,7 @@
                 </div>
             </div>
 
+            <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">

@@ -34,25 +34,22 @@
                 </main>
             </div>
 
-            <!-- FOOTER UTAMA -->
-            <footer class="bg-white border-t border-purple-100 py-6 mt-12 shadow-inner">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left">
-                    <div>
-                        <p class="font-bold text-gray-800 flex items-center justify-center md:justify-start gap-2">
-                            <span>🐾</span> 
-                            <span class="bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">
-                                Pet Grooming Service App
-                            </span>
-                        </p>
-                        <p class="text-xs text-gray-500 mt-1">
-                            Berikan perawatan terbaik dan penuh kasih sayang untuk hewan kesayangan Anda.
-                        </p>
-                    </div>
-                    <div class="text-xs text-gray-400 font-medium">
-                        &copy; {{ date('Y') }} Pet Grooming Laravel. All rights reserved. 
-                    </div>
-                </div>
-            </footer>
+            
+            <!-- Footer Minimalis Bernuansa Biru -->
+    <footer class="bg-white border-t border-sky-100 py-8 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-2">
+            <div class="flex items-center justify-center gap-2">
+                <span class="p-1.5 bg-sky-100 rounded-lg text-sm">🐾</span>
+                <span class="font-extrabold text-sky-700 text-sm">Pet Grooming Service App</span>
+            </div>
+            <p class="text-xs text-gray-500">
+                Berikan perawatan terbaik dan penuh kasih sayang untuk hewan kesayangan Anda.
+            </p>
+            <p class="text-[11px] text-gray-400 pt-2">
+                © 2026 Pet Grooming Laravel. All rights reserved.
+            </p>
+        </div>
+    </footer>
         </div>
     </body>
 </html>
