@@ -291,23 +291,4 @@
         </div>
 
     </div>
-
-    <!-- FOOTER DENGAN GRADASI BIRU CERAH -->
-    <footer class="relative overflow-hidden bg-gradient-to-r from-sky-500 via-blue-600 to-cyan-600 py-10 mt-16 text-white shadow-lg">
-        <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-white/10 rounded-full blur-2xl"></div>
-        <div class="absolute -left-10 -top-10 w-40 h-40 bg-cyan-300/20 rounded-full blur-2xl"></div>
-
-        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-3">
-            <div class="flex items-center justify-center gap-2">
-                <span class="p-2 bg-white/25 backdrop-blur-md rounded-xl text-base shadow-xs">🐾</span>
-                <span class="font-extrabold text-base tracking-wide">Pet Grooming Service App</span>
-            </div>
-            <p class="text-xs text-sky-100 max-w-md mx-auto leading-relaxed">
-                Berikan perawatan terbaik dan penuh kasih sayang untuk hewan kesayangan Anda bersama layanan profesional kami.
-            </p>
-            <p class="text-[11px] text-sky-200 pt-3 border-t border-white/15 mt-4">
-                © 2026 Pet Grooming Laravel. All rights reserved.
-            </p>
-        </div>
-    </footer>
 </x-app-layout>
