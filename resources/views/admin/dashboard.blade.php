@@ -1,203 +1,487 @@
+
 <x-app-layout>
     <x-slot name="header">
-        <div class="flex justify-between items-center">
-            <h2 class="font-bold text-2xl text-gray-800 leading-tight flex items-center gap-2">
-                <span>🛡️</span> 
-                <span class="bg-gradient-to-r from-sky-600 to-blue-600 bg-clip-text text-transparent">
-                    Admin Panel - Pet Grooming
-                </span>
-            </h2>
-            <span class="text-xs bg-sky-100 text-sky-800 px-3 py-1.5 rounded-full font-bold shadow-sm border border-sky-200">
-                ⚙️ Administrator Access
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div class="flex items-center gap-3">
+                <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-sky-500 to-blue-600 flex items-center justify-center text-2xl shadow-lg shadow-sky-500/20">
+                    🛡️
+                </div>
+                <div>
+                    <h2 class="font-extrabold text-xl sm:text-2xl text-gray-800 tracking-tight">
+                        Admin Dashboard
+                    </h2>
+                    <p class="text-xs text-gray-400 mt-0.5">Pet Grooming Management System</p>
+                </div>
+            </div>
+
+            <span class="inline-flex items-center gap-2 text-xs font-bold bg-sky-50 text-sky-700 border border-sky-100 px-4 py-2 rounded-xl">
+                <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                Administrator Access
             </span>
         </div>
     </x-slot>
 
-    <div class="py-10 bg-gradient-to-b from-sky-50/50 via-white to-gray-50 min-h-screen" x-data="{ 
-        modalOpen: false, 
-        selectedBooking: {},
-        editModalOpen: false,
-        editService: { id: '', name: '', description: '', price: '', duration: '' }
-    }">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-8">
-            
-            <div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-sky-500 via-blue-600 to-cyan-600 p-8 shadow-xl text-white">
-                <div class="absolute -right-10 -bottom-10 w-48 h-48 bg-white/10 rounded-full blur-2xl"></div>
-                <div class="relative z-10 flex justify-between items-center">
-                    <div>
-                        <span class="inline-block px-3 py-1 bg-white/20 backdrop-blur-md rounded-full text-xs font-semibold mb-3">
-                            Pusat Kontrol Utama 🛠️
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-fadeIn {
+            animation: fadeIn .6s ease-out forwards;
+        }
+
+        [x-cloak] {
+            display: none !important;
+        }
+    </style>
+
+    <div
+        class="min-h-screen bg-gradient-to-br from-sky-50 via-white to-blue-50 py-8 sm:py-10 animate-fadeIn"
+        x-data="{
+            modalOpen: false,
+            selectedBooking: {},
+            editModalOpen: false,
+            editService: {
+                id: '',
+                name: '',
+                description: '',
+                price: '',
+                duration: ''
+            }
+        }"
+    >
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-9">
+
+            {{-- HERO BANNER --}}
+            <section class="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-sky-500 via-blue-600 to-indigo-700 p-7 sm:p-10 lg:p-12 shadow-xl shadow-blue-500/15">
+
+                <div class="absolute -top-24 -right-16 w-80 h-80 rounded-full border-[45px] border-white/10"></div>
+                <div class="absolute -bottom-28 left-1/3 w-72 h-72 rounded-full bg-cyan-300/20 blur-3xl"></div>
+                <div class="absolute top-10 right-1/3 w-24 h-24 rounded-full bg-white/10 blur-2xl"></div>
+
+                <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
+                    <div class="text-white max-w-2xl">
+                        <span class="inline-flex items-center gap-2 rounded-full bg-white/15 border border-white/20 px-4 py-2 text-xs font-bold tracking-wide backdrop-blur-md mb-6">
+                            <span class="w-2 h-2 bg-emerald-300 rounded-full animate-pulse"></span>
+                            PUSAT KONTROL ADMINISTRATOR
                         </span>
-                        <h3 class="text-3xl font-extrabold tracking-tight">Halo, Admin {{ Auth::user()->name }}! 👋</h3>
-                        <p class="text-sky-100 mt-2 max-w-xl text-sm md:text-base">
-                            Kelola daftar layanan grooming dan verifikasi pesanan masuk dari para customer dengan mudah di sini.
+
+                        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black leading-tight tracking-tight">
+                            Halo, Admin {{ Auth::user()->name }}!
+                            <span class="block text-cyan-200 mt-2">Selamat Bekerja.</span>
+                        </h1>
+
+                        <p class="mt-5 text-sm sm:text-base text-sky-100 leading-7 max-w-xl">
+                            Kelola paket layanan grooming, pantau pesanan customer,
+                            dan atur proses pelayanan melalui dashboard administrator.
                         </p>
+
+                        <div class="flex flex-wrap gap-3 mt-8">
+                            <a href="#tambah-layanan"
+                               class="inline-flex items-center gap-2 bg-white text-blue-700 hover:bg-sky-50 px-5 py-3 rounded-xl font-extrabold text-sm shadow-lg transition hover:-translate-y-1">
+                                <span>＋</span>
+                                Tambah Layanan
+                            </a>
+
+                            <a href="#pesanan-masuk"
+                               class="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 border border-white/30 text-white px-5 py-3 rounded-xl font-bold text-sm backdrop-blur-md transition">
+                                <span>📋</span>
+                                Lihat Pesanan
+                            </a>
+                        </div>
                     </div>
-                    <div class="hidden md:block text-7xl transform hover:scale-110 transition duration-300">
-                        🐶✨
+
+                    <div class="hidden md:flex relative flex-shrink-0">
+                        <div class="w-52 h-52 lg:w-60 lg:h-60 rounded-full bg-white/10 border border-white/20 backdrop-blur-md flex items-center justify-center shadow-2xl">
+                            <span class="text-8xl lg:text-9xl">🐶</span>
+                        </div>
+                        <div class="absolute -top-3 -right-3 bg-white rounded-2xl px-4 py-3 shadow-xl rotate-6 text-3xl">
+                            ⚙️
+                        </div>
+                        <div class="absolute -bottom-2 -left-4 bg-white rounded-2xl px-4 py-3 shadow-xl -rotate-6 text-3xl">
+                            🐾
+                        </div>
                     </div>
                 </div>
-            </div>
+            </section>
 
+            {{-- SUCCESS NOTIFICATION --}}
             @if(session('success'))
-                <div class="bg-emerald-50 border-l-4 border-emerald-500 p-4 text-emerald-800 text-sm rounded-r-xl shadow-xs flex items-center gap-2">
-                    <span>✅</span>
-                    <span>{{ session('success') }}</span>
+                <div class="flex items-center gap-3 bg-emerald-50 border border-emerald-200 rounded-2xl px-5 py-4 text-emerald-800 shadow-sm">
+                    <div class="w-10 h-10 rounded-xl bg-emerald-100 flex items-center justify-center text-xl">
+                        ✓
+                    </div>
+                    <div>
+                        <p class="font-bold text-sm">Berhasil!</p>
+                        <p class="text-xs mt-0.5">{{ session('success') }}</p>
+                    </div>
                 </div>
             @endif
 
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                
-                <div class="bg-white rounded-2xl p-6 shadow-sm border border-sky-100">
-                    <h4 class="text-lg font-bold text-gray-800 mb-5 flex items-center gap-2 border-b border-gray-100 pb-3">
-                        <span class="p-2 bg-sky-100 rounded-lg text-sky-600 text-sm">➕</span>
-                        Tambah Layanan Baru
-                    </h4>
+            {{-- STATISTIK --}}
+            <section class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5">
 
-                    <form action="{{ route('admin.services.store') }}" method="POST" class="space-y-4">
+                <div class="bg-white rounded-3xl p-6 border border-sky-100 shadow-sm hover:shadow-lg transition">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-xs font-bold text-gray-400 uppercase tracking-wider">Total Layanan</p>
+                            <h3 class="text-3xl font-black text-gray-900 mt-2">
+                                {{ collect($services ?? [])->count() }}
+                            </h3>
+                            <p class="text-xs text-sky-600 font-semibold mt-2">Paket Grooming</p>
+                        </div>
+                        <div class="w-14 h-14 rounded-2xl bg-sky-100 flex items-center justify-center text-3xl">
+                            🐾
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-3xl p-6 border border-blue-100 shadow-sm hover:shadow-lg transition">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-xs font-bold text-gray-400 uppercase tracking-wider">Total Pesanan</p>
+                            <h3 class="text-3xl font-black text-gray-900 mt-2">
+                                {{ collect($bookings ?? [])->count() }}
+                            </h3>
+                            <p class="text-xs text-blue-600 font-semibold mt-2">Semua Pesanan</p>
+                        </div>
+                        <div class="w-14 h-14 rounded-2xl bg-blue-100 flex items-center justify-center text-3xl">
+                            📋
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-3xl p-6 border border-amber-100 shadow-sm hover:shadow-lg transition">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-xs font-bold text-gray-400 uppercase tracking-wider">Menunggu</p>
+                            <h3 class="text-3xl font-black text-gray-900 mt-2">
+                                {{ collect($bookings ?? [])->where('status', 'pending')->count() }}
+                            </h3>
+                            <p class="text-xs text-amber-600 font-semibold mt-2">Perlu Diproses</p>
+                        </div>
+                        <div class="w-14 h-14 rounded-2xl bg-amber-100 flex items-center justify-center text-3xl">
+                            ⏳
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-3xl p-6 border border-emerald-100 shadow-sm hover:shadow-lg transition">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-xs font-bold text-gray-400 uppercase tracking-wider">Selesai</p>
+                            <h3 class="text-3xl font-black text-gray-900 mt-2">
+                                {{ collect($bookings ?? [])->where('status', 'completed')->count() }}
+                            </h3>
+                            <p class="text-xs text-emerald-600 font-semibold mt-2">Pesanan Selesai</p>
+                        </div>
+                        <div class="w-14 h-14 rounded-2xl bg-emerald-100 flex items-center justify-center text-3xl">
+                            🎉
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+
+            {{-- FORM TAMBAH + DAFTAR LAYANAN --}}
+            <section class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+                {{-- TAMBAH LAYANAN --}}
+                <div id="tambah-layanan" class="bg-white rounded-3xl p-6 sm:p-7 shadow-sm border border-sky-100 scroll-mt-24">
+
+                    <div class="flex items-center gap-3 border-b border-gray-100 pb-5 mb-6">
+                        <div class="w-11 h-11 rounded-xl bg-sky-100 flex items-center justify-center text-xl">
+                            ➕
+                        </div>
+                        <div>
+                            <h3 class="font-extrabold text-gray-900">Tambah Layanan</h3>
+                            <p class="text-xs text-gray-400 mt-1">Buat paket grooming baru</p>
+                        </div>
+                    </div>
+
+                    <form action="{{ route('admin.services.store') }}" method="POST" class="space-y-5">
                         @csrf
-                        <div>
-                            <label class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1">Nama Layanan</label>
-                            <input type="text" name="name" placeholder="Contoh: Full Grooming Spa" class="w-full rounded-xl border-gray-200 bg-gray-50/50 focus:bg-white focus:border-sky-400 focus:ring-2 focus:ring-sky-200 text-sm p-3 transition" required>
-                        </div>
 
                         <div>
-                            <label class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1">Deskripsi Singkat</label>
-                            <textarea name="description" rows="2" placeholder="Fasilitas yang didapat..." class="w-full rounded-xl border-gray-200 bg-gray-50/50 focus:bg-white focus:border-sky-400 focus:ring-2 focus:ring-sky-200 text-sm p-3 transition" required></textarea>
+                            <label class="block text-xs font-extrabold text-gray-600 uppercase tracking-wider mb-2">
+                                Nama Layanan
+                            </label>
+                            <input
+                                type="text"
+                                name="name"
+                                placeholder="Contoh: Full Grooming Spa"
+                                class="w-full rounded-xl border-gray-200 bg-gray-50 focus:bg-white focus:border-sky-500 focus:ring-4 focus:ring-sky-100 text-sm p-3.5 transition"
+                                required
+                            >
                         </div>
 
-                        <div class="grid grid-cols-2 gap-3">
-                            <div>
-                                <label class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1">Harga (Rp)</label>
-                                <input type="number" name="price" placeholder="75000" class="w-full rounded-xl border-gray-200 bg-gray-50/50 focus:bg-white focus:border-sky-400 focus:ring-2 focus:ring-sky-200 text-sm p-3 transition" required>
-                            </div>
-                            <div>
-                                <label class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1">Durasi</label>
-                                <input type="text" name="duration" placeholder="45 Menit" class="w-full rounded-xl border-gray-200 bg-gray-50/50 focus:bg-white focus:border-sky-400 focus:ring-2 focus:ring-sky-200 text-sm p-3 transition">
-                            </div>
+                        <div>
+                            <label class="block text-xs font-extrabold text-gray-600 uppercase tracking-wider mb-2">
+                                Deskripsi
+                            </label>
+                            <textarea
+                                name="description"
+                                rows="3"
+                                placeholder="Jelaskan fasilitas yang didapat..."
+                                class="w-full rounded-xl border-gray-200 bg-gray-50 focus:bg-white focus:border-sky-500 focus:ring-4 focus:ring-sky-100 text-sm p-3.5 transition resize-none"
+                                required
+                            ></textarea>
                         </div>
 
-                        <div class="pt-2">
-                            <button type="submit" class="w-full bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-600 hover:to-blue-700 text-white font-bold py-3.5 px-4 rounded-xl shadow-lg shadow-sky-500/25 transition duration-150 flex items-center justify-center gap-2">
-                                <span>✨</span> Simpan Layanan
-                            </button>
+                        <div>
+                            <label class="block text-xs font-extrabold text-gray-600 uppercase tracking-wider mb-2">
+                                Harga (Rp)
+                            </label>
+                            <input
+                                type="number"
+                                name="price"
+                                min="0"
+                                placeholder="75000"
+                                class="w-full rounded-xl border-gray-200 bg-gray-50 focus:bg-white focus:border-sky-500 focus:ring-4 focus:ring-sky-100 text-sm p-3.5 transition"
+                                required
+                            >
                         </div>
+
+                        <div>
+                            <label class="block text-xs font-extrabold text-gray-600 uppercase tracking-wider mb-2">
+                                Durasi
+                            </label>
+                            <input
+                                type="text"
+                                name="duration"
+                                placeholder="45 Menit"
+                                class="w-full rounded-xl border-gray-200 bg-gray-50 focus:bg-white focus:border-sky-500 focus:ring-4 focus:ring-sky-100 text-sm p-3.5 transition"
+                            >
+                        </div>
+
+                        <button
+                            type="submit"
+                            class="w-full bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-600 hover:to-blue-700 text-white font-extrabold py-3.5 rounded-xl shadow-lg shadow-sky-500/20 transition hover:-translate-y-0.5 flex items-center justify-center gap-2"
+                        >
+                            ✨ Simpan Layanan
+                        </button>
                     </form>
                 </div>
 
-                <div class="lg:col-span-2 bg-white rounded-2xl p-6 shadow-sm border border-sky-100">
-                    <h4 class="text-lg font-bold text-gray-800 mb-5 flex items-center gap-2 border-b border-gray-100 pb-3">
-                        <span class="p-2 bg-blue-100 rounded-lg text-blue-600 text-sm">📋</span>
-                        Daftar Paket Layanan Aktif
-                    </h4>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 max-h-[420px] overflow-y-auto pr-2">
+                {{-- DAFTAR LAYANAN --}}
+                <div class="lg:col-span-2 bg-white rounded-3xl p-6 sm:p-7 shadow-sm border border-sky-100">
+
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-gray-100 pb-5 mb-6">
+                        <div class="flex items-center gap-3">
+                            <div class="w-11 h-11 rounded-xl bg-blue-100 flex items-center justify-center text-xl">
+                                📦
+                            </div>
+                            <div>
+                                <h3 class="font-extrabold text-gray-900">Daftar Paket Layanan</h3>
+                                <p class="text-xs text-gray-400 mt-1">Kelola paket grooming yang tersedia</p>
+                            </div>
+                        </div>
+                        <span class="text-xs font-bold text-sky-700 bg-sky-50 border border-sky-100 px-3 py-2 rounded-xl">
+                            {{ collect($services ?? [])->count() }} Layanan
+                        </span>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 max-h-[620px] overflow-y-auto pr-1">
+
                         @forelse($services ?? [] as $service)
-                            <!-- Kartu Layanan Admin dengan Efek Hover Border Biru -->
-                            <div class="p-4 rounded-xl bg-gradient-to-r from-sky-50/50 to-blue-50/50 border border-sky-100 shadow-xs hover:border-sky-400 hover:shadow-md hover:shadow-sky-500/10 transition-all duration-300 flex flex-col justify-between">
+                            <div class="group p-5 rounded-2xl bg-gradient-to-br from-sky-50/70 to-white border border-sky-100 hover:border-sky-300 hover:shadow-lg hover:shadow-sky-500/10 transition-all duration-300 flex flex-col justify-between">
+
                                 <div>
-                                    <div class="flex justify-between items-start">
-                                        <h5 class="font-bold text-gray-900">{{ $service->title }}</h5>
-                                        <div class="flex items-center gap-1.5">
-                                            <button @click="
-                                                editModalOpen = true; 
-                                                editService.id = '{{ $service->id }}';
-                                                editService.name = '{{ addslashes($service->title) }}';
-                                                editService.description = '{{ addslashes($service->description) }}';
-                                                editService.price = '{{ $service->price }}';
-                                                editService.duration = '{{ $service->duration }}';
-                                            " class="text-amber-600 hover:text-amber-800 text-xs font-bold px-2 py-1 bg-amber-50 hover:bg-amber-100 rounded-md border border-amber-200 transition">
+                                    <div class="flex justify-between items-start gap-3">
+                                        <div class="w-11 h-11 rounded-xl bg-white shadow-sm border border-sky-100 flex items-center justify-center text-2xl">
+                                            🐾
+                                        </div>
+
+                                        <div class="flex gap-2">
+                                            <button
+                                                type="button"
+                                                @click="
+                                                    editModalOpen = true;
+                                                    editService.id = {{ $service->id }};
+                                                    editService.name = {{ Illuminate\Support\Js::from($service->title) }};
+                                                    editService.description = {{ Illuminate\Support\Js::from($service->description) }};
+                                                    editService.price = {{ Illuminate\Support\Js::from((string) $service->price) }};
+                                                    editService.duration = {{ Illuminate\Support\Js::from($service->duration ?? '') }};
+                                                "
+                                                class="px-3 py-2 rounded-lg bg-amber-50 hover:bg-amber-100 text-amber-700 border border-amber-200 text-xs font-bold transition"
+                                            >
                                                 ✏️ Edit
                                             </button>
 
-                                            <form action="{{ route('admin.services.destroy', $service->id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus paket layanan ini?');">
+                                            <form
+                                                action="{{ route('admin.services.destroy', $service->id) }}"
+                                                method="POST"
+                                                onsubmit="return confirm('Yakin ingin menghapus paket layanan ini?');"
+                                            >
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="text-rose-500 hover:text-rose-700 text-xs font-bold px-2 py-1 bg-rose-50 hover:bg-rose-100 rounded-md border border-rose-200 transition">
-                                                    🗑️ Hapus
+                                                <button
+                                                    type="submit"
+                                                    class="px-3 py-2 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-600 border border-rose-200 text-xs font-bold transition"
+                                                >
+                                                    🗑️
                                                 </button>
                                             </form>
                                         </div>
                                     </div>
-                                    <p class="text-xs text-gray-600 mt-1">{{ $service->description }}</p>
+
+                                    <h4 class="font-extrabold text-gray-900 text-base mt-4">
+                                        {{ $service->title }}
+                                    </h4>
+
+                                    <p class="text-xs text-gray-500 mt-2 leading-5">
+                                        {{ $service->description }}
+                                    </p>
                                 </div>
-                                <div class="mt-4 pt-3 border-t border-sky-100/60 flex justify-between items-center">
-                                    <span class="text-xs font-semibold text-sky-700 bg-sky-100 px-2.5 py-1 rounded-md">
+
+                                <div class="mt-5 pt-4 border-t border-sky-100 flex justify-between items-center gap-2">
+                                    <span class="text-xs font-bold text-sky-700 bg-sky-100 px-3 py-2 rounded-lg">
                                         ⏱️ {{ $service->duration ?? '-' }}
                                     </span>
-                                    <span class="font-extrabold text-sm text-gray-900">
+
+                                    <span class="font-black text-gray-900 text-sm">
                                         Rp {{ number_format($service->price, 0, ',', '.') }}
                                     </span>
                                 </div>
                             </div>
                         @empty
-                            <p class="text-gray-400 text-sm col-span-2 text-center py-6">Belum ada layanan yang ditambahkan.</p>
+                            <div class="col-span-full text-center py-14 bg-gray-50 rounded-2xl border border-dashed border-gray-200">
+                                <div class="text-4xl mb-3">📦</div>
+                                <p class="font-bold text-gray-700">Belum Ada Layanan</p>
+                                <p class="text-xs text-gray-400 mt-1">Tambahkan paket grooming pertama Anda.</p>
+                            </div>
                         @endforelse
+
                     </div>
                 </div>
+            </section>
 
-            </div>
+            {{-- PESANAN MASUK --}}
+            <section id="pesanan-masuk" class="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-sky-100 scroll-mt-24">
 
-            <div class="bg-white rounded-2xl p-6 shadow-sm border border-sky-100">
-                <h4 class="text-lg font-bold text-gray-800 mb-5 flex items-center gap-2 border-b border-gray-100 pb-3">
-                    <span class="p-2 bg-cyan-100 rounded-lg text-cyan-600 text-sm">📥</span>
-                    Kelola Pesanan Masuk Customer
-                </h4>
-                <div class="overflow-x-auto rounded-xl border border-gray-100">
-                    <table class="min-w-full divide-y divide-gray-200">
-                        <thead class="bg-gradient-to-r from-gray-50 to-sky-50/30">
-                            <tr>
-                                <th class="px-6 py-3.5 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">Customer</th>
-                                <th class="px-6 py-3.5 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">Layanan & Hewan</th>
-                                <th class="px-6 py-3.5 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">Jadwal</th>
-                                <th class="px-6 py-3.5 text-center text-xs font-bold text-gray-600 uppercase tracking-wider">Update Progress & Aksi</th>
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-gray-100 pb-5 mb-6">
+                    <div class="flex items-center gap-3">
+                        <div class="w-11 h-11 rounded-xl bg-cyan-100 flex items-center justify-center text-xl">
+                            📥
+                        </div>
+                        <div>
+                            <h3 class="font-extrabold text-gray-900 text-lg">Pesanan Masuk Customer</h3>
+                            <p class="text-xs text-gray-400 mt-1">Kelola dan perbarui status pesanan</p>
+                        </div>
+                    </div>
+
+                    <span class="text-xs font-bold text-cyan-700 bg-cyan-50 border border-cyan-100 px-4 py-2 rounded-xl">
+                        {{ collect($bookings ?? [])->count() }} Pesanan
+                    </span>
+                </div>
+
+                <div class="overflow-x-auto rounded-2xl border border-gray-100">
+                    <table class="min-w-full">
+                        <thead>
+                            <tr class="bg-gradient-to-r from-sky-50 to-blue-50 border-b border-sky-100">
+                                <th class="px-6 py-4 text-left text-[11px] font-extrabold text-gray-500 uppercase tracking-wider">Customer</th>
+                                <th class="px-6 py-4 text-left text-[11px] font-extrabold text-gray-500 uppercase tracking-wider">Layanan & Hewan</th>
+                                <th class="px-6 py-4 text-left text-[11px] font-extrabold text-gray-500 uppercase tracking-wider">Jadwal</th>
+                                <th class="px-6 py-4 text-center text-[11px] font-extrabold text-gray-500 uppercase tracking-wider">Status & Aksi</th>
                             </tr>
                         </thead>
-                        <tbody class="bg-white divide-y divide-gray-100 text-sm">
+
+                        <tbody class="divide-y divide-gray-100">
                             @forelse($bookings ?? [] as $booking)
-                                <tr class="hover:bg-sky-50/20 transition">
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="font-bold text-gray-900">{{ $booking->customer_name }}</div>
-                                        <div class="text-xs text-gray-500">{{ $booking->phone }}</div>
+                                <tr class="hover:bg-sky-50/40 transition">
+
+                                    <td class="px-6 py-5 whitespace-nowrap">
+                                        <div class="flex items-center gap-3">
+                                            <div class="w-10 h-10 rounded-xl bg-sky-100 text-sky-700 flex items-center justify-center font-extrabold text-sm">
+                                                {{ strtoupper(substr($booking->customer_name, 0, 1)) }}
+                                            </div>
+                                            <div>
+                                                <p class="font-bold text-gray-900 text-sm">
+                                                    {{ $booking->customer_name }}
+                                                </p>
+                                                <p class="text-xs text-gray-400 mt-1">
+                                                    {{ $booking->phone }}
+                                                </p>
+                                            </div>
+                                        </div>
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="font-semibold text-sky-700">{{ $booking->service->title ?? 'Layanan' }}</div>
-                                        <div class="text-xs text-gray-600">🐾 {{ $booking->pet_type }}</div>
+
+                                    <td class="px-6 py-5 whitespace-nowrap">
+                                        <p class="font-bold text-sky-700 text-sm">
+                                            {{ $booking->service->title ?? 'Layanan' }}
+                                        </p>
+                                        <p class="text-xs text-gray-500 mt-1">
+                                            🐾 {{ $booking->pet_type }}
+                                        </p>
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-gray-600 text-xs">
-                                        📅 {{ \Carbon\Carbon::parse($booking->booking_time)->format('d M Y, H:i') }}
+
+                                    <td class="px-6 py-5 whitespace-nowrap text-xs text-gray-500">
+                                        📅 {{ \Carbon\Carbon::parse($booking->booking_time)->format('d M Y') }}
+                                        <p class="mt-1 font-bold text-gray-700">
+                                            {{ \Carbon\Carbon::parse($booking->booking_time)->format('H:i') }} WIB
+                                        </p>
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-center">
-                                        <div class="flex items-center justify-center gap-2">
-                                            <button @click="modalOpen = true; selectedBooking = {{ json_encode([
-                                                'customer_name' => $booking->customer_name,
-                                                'customer_email' => $booking->customer_email ?? '-',
-                                                'phone' => $booking->phone,
-                                                'service_title' => $booking->service->title ?? 'Layanan',
-                                                'pet_type' => $booking->pet_type,
-                                                'booking_time' => \Carbon\Carbon::parse($booking->booking_time)->format('d M Y, H:i'),
-                                                'address' => $booking->address,
-                                                'status' => $booking->status
-                                            ]) }}" class="px-3 py-1 bg-sky-50 hover:bg-sky-100 text-sky-700 text-xs font-bold rounded-lg border border-sky-200 transition">
+
+                                    <td class="px-6 py-5">
+                                        <div class="flex flex-col sm:flex-row items-center justify-center gap-2">
+
+                                            <button
+                                                type="button"
+                                                @click="
+                                                    modalOpen = true;
+                                                    selectedBooking = {{ Illuminate\Support\Js::from([
+                                                        'customer_name' => $booking->customer_name,
+                                                        'customer_email' => $booking->customer_email ?? '-',
+                                                        'phone' => $booking->phone,
+                                                        'service_title' => $booking->service->title ?? 'Layanan',
+                                                        'pet_type' => $booking->pet_type,
+                                                        'booking_time' => \Carbon\Carbon::parse($booking->booking_time)->format('d M Y, H:i'),
+                                                        'address' => $booking->address,
+                                                        'status' => $booking->status
+                                                    ]) }};
+                                                "
+                                                class="px-3 py-2 bg-sky-50 hover:bg-sky-100 text-sky-700 text-xs font-bold rounded-lg border border-sky-200 transition"
+                                            >
                                                 🔍 Detail
                                             </button>
 
-                                            <form action="{{ route('admin.bookings.update', $booking->id) }}" method="POST" class="inline-flex items-center">
+                                            <form
+                                                action="{{ route('admin.bookings.update', $booking->id) }}"
+                                                method="POST"
+                                                class="inline-flex"
+                                            >
                                                 @csrf
                                                 @method('PATCH')
-                                                <select name="status" onchange="this.form.submit()" class="text-xs font-bold rounded-lg border-gray-300 bg-gray-50 p-1.5 focus:border-sky-400 focus:ring-sky-200 cursor-pointer">
+
+                                                <select
+                                                    name="status"
+                                                    onchange="this.form.submit()"
+                                                    class="text-xs font-bold rounded-lg border-gray-200 bg-gray-50 focus:border-sky-500 focus:ring-sky-100 py-2 pl-2 pr-7"
+                                                >
                                                     <option value="pending" {{ $booking->status == 'pending' ? 'selected' : '' }}>⏳ Pending</option>
                                                     <option value="approved" {{ $booking->status == 'approved' ? 'selected' : '' }}>✅ Disetujui</option>
-                                                    <option value="picked_up" {{ $booking->status == 'picked_up' ? 'selected' : '' }}>🚗 Sedang Dijemput</option>
-                                                    <option value="grooming" {{ $booking->status == 'grooming' ? 'selected' : '' }}>🛁 Proses Grooming</option>
+                                                    <option value="picked_up" {{ $booking->status == 'picked_up' ? 'selected' : '' }}>🚗 Dijemput</option>
+                                                    <option value="grooming" {{ $booking->status == 'grooming' ? 'selected' : '' }}>🛁 Grooming</option>
                                                     <option value="completed" {{ $booking->status == 'completed' ? 'selected' : '' }}>🎉 Selesai</option>
                                                     <option value="rejected" {{ $booking->status == 'rejected' ? 'selected' : '' }}>❌ Ditolak</option>
                                                 </select>
                                             </form>
 
-                                            <form action="{{ route('admin.bookings.destroy', $booking->id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus riwayat pesanan ini?');">
+                                            <form
+                                                action="{{ route('admin.bookings.destroy', $booking->id) }}"
+                                                method="POST"
+                                                onsubmit="return confirm('Yakin ingin menghapus riwayat pesanan ini?');"
+                                            >
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="px-2.5 py-1.5 bg-rose-50 hover:bg-rose-100 text-rose-600 text-xs font-bold rounded-lg border border-rose-200 transition" title="Hapus Pesanan">
+
+                                                <button
+                                                    type="submit"
+                                                    class="px-3 py-2 bg-rose-50 hover:bg-rose-100 text-rose-600 text-xs font-bold rounded-lg border border-rose-200 transition"
+                                                    title="Hapus Pesanan"
+                                                >
                                                     🗑️
                                                 </button>
                                             </form>
@@ -206,96 +490,173 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="4" class="px-6 py-8 text-center text-gray-400 bg-gray-50/50">
-                                        <div class="text-3xl mb-1">📭</div>
-                                        Belum ada pesanan masuk dari customer.
+                                    <td colspan="4" class="px-6 py-16 text-center">
+                                        <div class="text-4xl mb-3">📭</div>
+                                        <p class="font-bold text-gray-700">Belum Ada Pesanan</p>
+                                        <p class="text-xs text-gray-400 mt-1">Pesanan customer akan muncul di sini.</p>
                                     </td>
                                 </tr>
                             @endforelse
                         </tbody>
                     </table>
                 </div>
-            </div>
-
+            </section>
         </div>
 
-        <div x-show="modalOpen" class="fixed inset-0 z-50 overflow-y-auto bg-gray-900/50 backdrop-blur-xs flex items-center justify-center p-4" x-cloak>
-            <div @click.away="modalOpen = false" class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-sky-100 space-y-4">
-                <div class="flex justify-between items-center border-b border-gray-100 pb-3">
-                    <h3 class="font-extrabold text-lg text-gray-800 flex items-center gap-2">
-                        <span>📋</span> Detail Lengkap Pesanan
-                    </h3>
-                    <button @click="modalOpen = false" class="text-gray-400 hover:text-gray-600 text-xl font-bold">&times;</button>
-                </div>
-
-                <div class="space-y-3 text-sm text-gray-700">
-                    <div class="bg-sky-50/50 p-3 rounded-xl border border-sky-100">
-                        <span class="text-xs font-bold text-sky-700 uppercase tracking-wider block mb-1">Informasi Customer</span>
-                        <p class="font-bold text-gray-900" x-text="selectedBooking.customer_name"></p>
-                        <p class="text-xs text-gray-600" x-text="'Email: ' + selectedBooking.customer_email"></p>
-                        <p class="text-xs text-gray-600" x-text="'No. Telepon: ' + selectedBooking.phone"></p>
-                    </div>
-
-                    <div class="bg-gray-50 p-3 rounded-xl border border-gray-200">
-                        <span class="text-xs font-bold text-sky-700 uppercase tracking-wider block mb-1">Detail Layanan & Hewan</span>
-                        <p class="font-bold text-sky-700" x-text="selectedBooking.service_title"></p>
-                        <p class="text-xs text-gray-600" x-text="'Jenis Hewan / Catatan: ' + selectedBooking.pet_type"></p>
-                        <p class="text-xs text-gray-600" x-text="'Jadwal Penjemputan: ' + selectedBooking.booking_time"></p>
-                    </div>
-
-                    <div class="bg-blue-50/50 p-3 rounded-xl border border-blue-100">
-                        <span class="text-xs font-bold text-blue-700 uppercase tracking-wider block mb-1">Alamat Penjemputan / Catatan Khusus</span>
-                        <p class="text-xs text-gray-800 font-medium whitespace-pre-line" x-text="selectedBooking.address"></p>
+        {{-- MODAL DETAIL PESANAN --}}
+        <div
+            x-show="modalOpen"
+            x-cloak
+            x-transition.opacity
+            class="fixed inset-0 z-50 overflow-y-auto bg-gray-950/60 backdrop-blur-sm flex items-center justify-center p-4"
+        >
+            <div
+                @click.away="modalOpen = false"
+                x-transition:enter="transition ease-out duration-300"
+                x-transition:enter-start="opacity-0 scale-95 translate-y-4"
+                x-transition:enter-end="opacity-100 scale-100 translate-y-0"
+                class="bg-white rounded-[2rem] max-w-lg w-full shadow-2xl overflow-hidden"
+            >
+                <div class="bg-gradient-to-r from-sky-500 to-blue-600 p-6 text-white">
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <span class="text-xs text-sky-100 font-bold uppercase tracking-widest">Booking Information</span>
+                            <h3 class="font-black text-xl mt-1">Detail Pesanan</h3>
+                        </div>
+                        <button @click="modalOpen = false" class="w-9 h-9 rounded-xl bg-white/15 hover:bg-white/25 text-2xl transition">
+                            &times;
+                        </button>
                     </div>
                 </div>
 
-                <div class="pt-3 border-t border-gray-100 flex justify-end">
-                    <button @click="modalOpen = false" class="px-4 py-2 bg-gray-800 hover:bg-gray-900 text-white text-xs font-bold rounded-xl transition">
-                        Tutup
-                    </button>
+                <div class="p-6 space-y-4 text-sm">
+
+                    <div class="bg-sky-50 p-4 rounded-2xl border border-sky-100">
+                        <p class="text-[10px] font-extrabold text-sky-700 uppercase tracking-widest mb-3">Informasi Customer</p>
+                        <p class="font-extrabold text-gray-900" x-text="selectedBooking.customer_name"></p>
+                        <p class="text-xs text-gray-500 mt-2" x-text="'Email: ' + selectedBooking.customer_email"></p>
+                        <p class="text-xs text-gray-500 mt-1" x-text="'Telepon: ' + selectedBooking.phone"></p>
+                    </div>
+
+                    <div class="bg-gray-50 p-4 rounded-2xl border border-gray-100">
+                        <p class="text-[10px] font-extrabold text-gray-500 uppercase tracking-widest mb-3">Layanan & Hewan</p>
+                        <p class="font-extrabold text-sky-700" x-text="selectedBooking.service_title"></p>
+                        <p class="text-xs text-gray-600 mt-2" x-text="'Jenis Hewan: ' + selectedBooking.pet_type"></p>
+                        <p class="text-xs text-gray-600 mt-1" x-text="'Jadwal: ' + selectedBooking.booking_time"></p>
+                    </div>
+
+                    <div class="bg-blue-50 p-4 rounded-2xl border border-blue-100">
+                        <p class="text-[10px] font-extrabold text-blue-700 uppercase tracking-widest mb-3">Alamat Penjemputan</p>
+                        <p class="text-xs text-gray-700 leading-6 whitespace-pre-line" x-text="selectedBooking.address"></p>
+                    </div>
+
+                    <div class="pt-2">
+                        <button
+                            @click="modalOpen = false"
+                            class="w-full bg-gray-900 hover:bg-gray-800 text-white font-bold py-3.5 rounded-xl text-sm transition"
+                        >
+                            Tutup Detail
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div x-show="editModalOpen" class="fixed inset-0 z-50 overflow-y-auto bg-gray-900/50 backdrop-blur-xs flex items-center justify-center p-4" x-cloak>
-            <div @click.away="editModalOpen = false" class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-sky-100 space-y-4">
-                <div class="flex justify-between items-center border-b border-gray-100 pb-3">
-                    <h3 class="font-extrabold text-lg text-gray-800 flex items-center gap-2">
-                        <span>✏️</span> Edit Paket Layanan
-                    </h3>
-                    <button @click="editModalOpen = false" class="text-gray-400 hover:text-gray-600 text-xl font-bold">&times;</button>
+        {{-- MODAL EDIT LAYANAN --}}
+        <div
+            x-show="editModalOpen"
+            x-cloak
+            x-transition.opacity
+            class="fixed inset-0 z-50 overflow-y-auto bg-gray-950/60 backdrop-blur-sm flex items-center justify-center p-4"
+        >
+            <div
+                @click.away="editModalOpen = false"
+                x-transition:enter="transition ease-out duration-300"
+                x-transition:enter-start="opacity-0 scale-95 translate-y-4"
+                x-transition:enter-end="opacity-100 scale-100 translate-y-0"
+                class="bg-white rounded-[2rem] max-w-lg w-full shadow-2xl overflow-hidden"
+            >
+                <div class="bg-gradient-to-r from-sky-500 to-blue-600 p-6 text-white">
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <span class="text-xs text-sky-100 font-bold uppercase tracking-widest">Service Management</span>
+                            <h3 class="font-black text-xl mt-1">Edit Paket Layanan</h3>
+                        </div>
+                        <button @click="editModalOpen = false" class="w-9 h-9 rounded-xl bg-white/15 hover:bg-white/25 text-2xl transition">
+                            &times;
+                        </button>
+                    </div>
                 </div>
 
-                <form :action="'/admin/services/' + editService.id" method="POST" class="space-y-4">
+                <form :action="'/admin/services/' + editService.id" method="POST" class="p-6 space-y-5">
                     @csrf
                     @method('PUT')
 
                     <div>
-                        <label class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1">Nama Layanan</label>
-                        <input type="text" name="name" x-model="editService.name" class="w-full rounded-xl border-gray-200 bg-gray-50/50 focus:bg-white focus:border-sky-400 text-sm p-3 transition" required>
+                        <label class="block text-xs font-extrabold text-gray-600 uppercase tracking-wider mb-2">
+                            Nama Layanan
+                        </label>
+                        <input
+                            type="text"
+                            name="name"
+                            x-model="editService.name"
+                            class="w-full rounded-xl border-gray-200 bg-gray-50 focus:bg-white focus:border-sky-500 focus:ring-4 focus:ring-sky-100 text-sm p-3.5 transition"
+                            required
+                        >
                     </div>
 
                     <div>
-                        <label class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1">Deskripsi Singkat</label>
-                        <textarea name="description" rows="2" x-model="editService.description" class="w-full rounded-xl border-gray-200 bg-gray-50/50 focus:bg-white focus:border-sky-400 text-sm p-3 transition" required></textarea>
+                        <label class="block text-xs font-extrabold text-gray-600 uppercase tracking-wider mb-2">
+                            Deskripsi
+                        </label>
+                        <textarea
+                            name="description"
+                            rows="3"
+                            x-model="editService.description"
+                            class="w-full rounded-xl border-gray-200 bg-gray-50 focus:bg-white focus:border-sky-500 focus:ring-4 focus:ring-sky-100 text-sm p-3.5 transition resize-none"
+                            required
+                        ></textarea>
                     </div>
 
-                    <div class="grid grid-cols-2 gap-3">
-                        <div>
-                            <label class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1">Harga (Rp)</label>
-                            <input type="number" name="price" x-model="editService.price" class="w-full rounded-xl border-gray-200 bg-gray-50/50 focus:bg-white focus:border-sky-400 text-sm p-3 transition" required>
-                        </div>
-                        <div>
-                            <label class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1">Durasi</label>
-                            <input type="text" name="duration" x-model="editService.duration" class="w-full rounded-xl border-gray-200 bg-gray-50/50 focus:bg-white focus:border-sky-400 text-sm p-3 transition">
-                        </div>
+                    <div>
+                        <label class="block text-xs font-extrabold text-gray-600 uppercase tracking-wider mb-2">
+                            Harga (Rp)
+                        </label>
+                        <input
+                            type="number"
+                            name="price"
+                            min="0"
+                            x-model="editService.price"
+                            class="w-full rounded-xl border-gray-200 bg-gray-50 focus:bg-white focus:border-sky-500 focus:ring-4 focus:ring-sky-100 text-sm p-3.5 transition"
+                            required
+                        >
                     </div>
 
-                    <div class="pt-2 flex gap-3">
-                        <button type="button" @click="editModalOpen = false" class="w-1/2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold py-3 rounded-xl text-xs transition">
+                    <div>
+                        <label class="block text-xs font-extrabold text-gray-600 uppercase tracking-wider mb-2">
+                            Durasi
+                        </label>
+                        <input
+                            type="text"
+                            name="duration"
+                            x-model="editService.duration"
+                            class="w-full rounded-xl border-gray-200 bg-gray-50 focus:bg-white focus:border-sky-500 focus:ring-4 focus:ring-sky-100 text-sm p-3.5 transition"
+                        >
+                    </div>
+
+                    <div class="flex gap-3 pt-2">
+                        <button
+                            type="button"
+                            @click="editModalOpen = false"
+                            class="w-1/2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold py-3.5 rounded-xl text-sm transition"
+                        >
                             Batal
                         </button>
-                        <button type="submit" class="w-1/2 bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-white font-bold py-3 rounded-xl shadow-lg shadow-amber-500/25 text-xs transition">
+
+                        <button
+                            type="submit"
+                            class="w-1/2 bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-600 hover:to-blue-700 text-white font-extrabold py-3.5 rounded-xl text-sm shadow-lg shadow-sky-500/20 transition"
+                        >
                             💾 Simpan Perubahan
                         </button>
                     </div>
