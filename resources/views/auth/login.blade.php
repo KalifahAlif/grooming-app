@@ -14,61 +14,48 @@
         <div class="relative w-full max-w-5xl bg-white/90 backdrop-blur-xl rounded-[2rem] shadow-[0_25px_80px_-20px_rgba(14,116,144,0.25)] overflow-hidden border border-white grid grid-cols-1 md:grid-cols-2">
 
             {{-- LEFT PANEL --}}
-            <div class="relative hidden md:flex flex-col justify-between min-h-[650px] bg-gradient-to-br from-sky-500 via-blue-600 to-indigo-700 p-12 text-white overflow-hidden">
+<div class="relative hidden md:flex flex-col justify-between min-h-[650px] bg-gradient-to-br from-sky-500 via-blue-600 to-indigo-700 p-12 text-white overflow-hidden">
 
-                {{-- Decorative Circles --}}
-                <div class="absolute -top-20 -right-20 w-72 h-72 border-[40px] border-white/10 rounded-full"></div>
-                <div class="absolute bottom-20 -left-24 w-72 h-72 border-[35px] border-white/10 rounded-full"></div>
-                <div class="absolute top-1/2 right-0 w-40 h-40 bg-cyan-300/20 rounded-full blur-3xl"></div>
+    {{-- Decorative Circles --}}
+    <div class="absolute -top-20 -right-20 w-72 h-72 border-[40px] border-white/10 rounded-full"></div>
+    <div class="absolute bottom-20 -left-24 w-72 h-72 border-[35px] border-white/10 rounded-full"></div>
+    <div class="absolute top-1/2 right-0 w-40 h-40 bg-cyan-300/20 rounded-full blur-3xl"></div>
 
-                {{-- Brand --}}
-                <div class="relative z-10 flex items-center gap-4">
-                    <div class="w-14 h-14 flex items-center justify-center bg-white/20 backdrop-blur-lg rounded-2xl text-3xl shadow-lg border border-white/20">
-                        🐾
-                    </div>
-                    <div>
-                        <h1 class="font-extrabold text-xl tracking-wide">Pet Grooming</h1>
-                        <p class="text-xs text-sky-100 tracking-widest uppercase mt-1">Professional Care App</p>
-                    </div>
-                </div>
+    {{-- BRAND / LOGO --}}
+    <div class="relative z-15 flex flex-col items-center text-center mx-auto pt-4">
+        {{-- Kotak putih pembungkus kita perbesar sedikit agar lebih ideal (w-28 h-28) --}}
+        <div class="w-28 h-28 flex items-center justify-center bg-white rounded-[2.25rem] shadow-2xl shadow-sky-900/25 border border-white/80 mb-4 transform transition hover:scale-105 duration-300 overflow-hidden">
+            {{-- Gambar logonya kita zoom menggunakan scale-150 atau scale-175 agar ikon di dalamnya terlihat besar memenuhi kotak --}}
+            <img src="{{ asset('images/logo-paw.png') }}" alt="Logo Pet Grooming" class="w-50 h-50 object-contain scale-[1.75]">
+        </div>
+        <h1 class="font-black text-2xl tracking-tight text-white">Pet Grooming</h1>
+        <p class="text-[11px] text-sky-100 tracking-[0.25em] uppercase font-bold mt-1">Professional Care App</p>
+    </div>
 
-                {{-- Hero Content --}}
-                <div class="relative z-10 my-auto py-12">
-                    <span class="inline-flex items-center gap-2 px-4 py-2 bg-white/15 backdrop-blur-md rounded-full text-xs font-bold tracking-wide border border-white/20 mb-7">
-                        <span class="w-2 h-2 bg-green-300 rounded-full animate-pulse"></span>
-                        PERAWATAN TERBAIK ANABUL
-                    </span>
+    {{-- Hero Content --}}
+    <div class="relative z-10 my-auto py-8 text-center">
+        <span class="inline-flex items-center gap-2 px-4 py-2 bg-white/15 backdrop-blur-md rounded-full text-xs font-bold tracking-wide border border-white/20 mb-6">
+            <span class="w-2 h-2 bg-green-300 rounded-full animate-pulse"></span>
+            PERAWATAN TERBAIK ANABUL
+        </span>
 
-                    <h2 class="text-4xl lg:text-5xl font-black tracking-tight leading-[1.2]">
-                        Sayangi Mereka,
-                        <span class="text-cyan-200">Rawat Dengan</span>
-                        Sepenuh Hati.
-                    </h2>
+        <h2 class="text-3xl lg:text-4xl font-black tracking-tight leading-[1.2]">
+            Sayangi Mereka,
+            <span class="block text-cyan-200 mt-1">Rawat Dengan Sepenuh Hati.</span>
+        </h2>
 
-                    <p class="text-sky-100 text-sm leading-7 mt-6 max-w-sm">
-                        Berikan pengalaman perawatan terbaik untuk hewan kesayangan Anda. Booking layanan grooming, pantau pesanan, dan nikmati kemudahan dalam satu aplikasi.
-                    </p>
+        <p class="text-sky-100 text-sm leading-7 mt-5 max-w-sm mx-auto">
+            Berikan pengalaman perawatan terbaik untuk hewan kesayangan Anda. Booking layanan grooming, pantau pesanan, dan nikmati kemudahan dalam satu aplikasi.
+        </p>
+    </div>
 
-                    <div class="flex items-center gap-4 mt-9">
-                        <div class="flex -space-x-3">
-                            <div class="w-10 h-10 rounded-full bg-amber-200 border-2 border-white flex items-center justify-center text-lg">🐱</div>
-                            <div class="w-10 h-10 rounded-full bg-sky-200 border-2 border-white flex items-center justify-center text-lg">🐶</div>
-                            <div class="w-10 h-10 rounded-full bg-pink-200 border-2 border-white flex items-center justify-center text-lg">🐰</div>
-                        </div>
-                        <div>
-                            <p class="text-sm font-bold">Happy Pets, Happy Owners!</p>
-                            <p class="text-xs text-sky-100">Your pet deserves the best care.</p>
-                        </div>
-                    </div>
-                </div>
-
-                {{-- Footer --}}
-                <div class="relative z-10 border-t border-white/20 pt-6">
-                    <p class="text-xs text-sky-100">
-                        © 2026 Pet Grooming Laravel. All rights reserved.
-                    </p>
-                </div>
-            </div>
+    {{-- Footer --}}
+    <div class="relative z-10 border-t border-white/20 pt-6 text-center">
+        <p class="text-xs text-sky-100">
+            © 2026 Pet Grooming. All rights reserved.
+        </p>
+    </div>
+</div>
 
             {{-- RIGHT PANEL --}}
             <div class="relative p-8 sm:p-12 lg:p-14 flex flex-col justify-center bg-white">

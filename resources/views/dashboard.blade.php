@@ -1,10 +1,9 @@
-
 <x-app-layout>
     <x-slot name="header">
         <div class="flex items-center justify-between">
             <div class="flex items-center gap-3">
-                <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-sky-500 to-blue-600 flex items-center justify-center text-2xl shadow-lg shadow-sky-500/20">
-                    🐾
+                <div class="w-11 h-11 rounded-2xl bg-white border border-sky-100 flex items-center justify-center shadow-lg shadow-sky-500/15 overflow-hidden">
+                    <img src="{{ asset('images/logo-paw.png') }}" alt="Logo Pet Grooming" class="w-full h-full object-contain scale-[1.65]">
                 </div>
                 <div>
                     <h2 class="font-extrabold text-xl sm:text-2xl text-gray-800 tracking-tight">
@@ -78,16 +77,16 @@
                     </div>
 
                     <div class="relative flex-shrink-0">
-                        <div class="w-52 h-52 sm:w-64 sm:h-64 rounded-full bg-white/10 border border-white/20 backdrop-blur-md flex items-center justify-center shadow-2xl">
-                            <div class="text-8xl sm:text-9xl transition duration-500 hover:scale-110 hover:rotate-6">
-                                🐈‍⬛
+                        <div class="w-52 h-52 sm:w-64 sm:h-64 rounded-full bg-white/10 border border-white/20 backdrop-blur-md flex items-center justify-center shadow-2xl overflow-hidden p-8">
+                            <div class="w-full h-full flex items-center justify-center transition duration-500 hover:scale-110 hover:rotate-6">
+                                <img src="{{ asset('images/logo-paw.png') }}" alt="Logo Pet Grooming" class="w-full h-full object-contain drop-shadow-2xl scale-[1.85]">
                             </div>
                         </div>
-                        <div class="absolute -top-3 -right-4 bg-white rounded-2xl px-4 py-3 shadow-xl rotate-6">
-                            <span class="text-2xl">🐶</span>
+                        <div class="absolute -top-3 -right-4 bg-white rounded-2xl p-2.5 shadow-xl rotate-6 w-12 h-12 flex items-center justify-center overflow-hidden">
+                            <img src="{{ asset('images/logo-paw.png') }}" alt="Logo Pet Grooming" class="w-full h-full object-contain scale-[1.65]">
                         </div>
-                        <div class="absolute -bottom-2 -left-5 bg-white rounded-2xl px-4 py-3 shadow-xl -rotate-6">
-                            <span class="text-2xl">🐾</span>
+                        <div class="absolute -bottom-2 -left-5 w-14 h-14 bg-white rounded-2xl shadow-xl -rotate-6 flex items-center justify-center overflow-hidden p-1.5">
+                            <img src="{{ asset('images/logo-paw.png') }}" alt="Logo Pet Grooming" class="w-full h-full object-contain scale-[1.65]">
                         </div>
                     </div>
                 </div>
@@ -120,9 +119,6 @@
                             Lihat momen menyenangkan selama proses perawatan.
                         </p>
                     </div>
-                    <span class="inline-flex items-center gap-2 text-xs font-bold text-sky-700 bg-sky-100 px-4 py-2 rounded-xl w-fit">
-                        
-                    </span>
                 </div>
 
                 <div
@@ -239,10 +235,6 @@
                             Temukan perawatan yang tepat untuk hewan kesayangan Anda.
                         </p>
                     </div>
-
-                    <span class="text-xs font-bold text-sky-700 bg-sky-100 px-4 py-2 rounded-xl w-fit">
-                        
-                    </span>
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
@@ -253,8 +245,8 @@
 
                             <div class="p-6 flex flex-col flex-1">
                                 <div class="flex justify-between items-center mb-5">
-                                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-sky-100 to-blue-100 flex items-center justify-center text-3xl group-hover:scale-110 transition">
-                                        🐾
+                                    <div class="w-14 h-14 rounded-2xl bg-white border border-sky-100 shadow-sm flex items-center justify-center group-hover:scale-110 transition overflow-hidden p-1.5">
+                                        <img src="{{ asset('images/logo-paw.png') }}" alt="Logo Layanan" class="w-full h-full object-contain scale-[1.65]">
                                     </div>
 
                                     <span class="inline-flex items-center gap-1.5 text-xs font-bold text-sky-700 bg-sky-50 border border-sky-100 px-3 py-2 rounded-xl">
@@ -295,7 +287,9 @@
                         </div>
                     @empty
                         <div class="col-span-full text-center py-16 bg-white rounded-3xl border border-dashed border-sky-200">
-                            <div class="text-5xl mb-4">🐾</div>
+                            <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-white border border-sky-100 shadow-sm flex items-center justify-center overflow-hidden p-1.5">
+                                <img src="{{ asset('images/logo-paw.png') }}" alt="Logo Pet Grooming" class="w-full h-full object-contain scale-[1.65]">
+                            </div>
                             <h4 class="font-bold text-gray-700">Belum Ada Paket Layanan</h4>
                             <p class="text-sm text-gray-400 mt-2">
                                 Paket grooming belum tersedia saat ini.
@@ -319,10 +313,6 @@
                             Pantau perkembangan layanan grooming Anda.
                         </p>
                     </div>
-
-                    <span class="text-xs font-bold text-indigo-700 bg-indigo-50 border border-indigo-100 px-4 py-2 rounded-xl w-fit">
-                       
-                    </span>
                 </div>
 
                 <div class="bg-white rounded-3xl border border-sky-100 shadow-sm overflow-hidden">
@@ -348,7 +338,10 @@
 
                                         <td class="px-6 py-5 whitespace-nowrap">
                                             <span class="inline-flex items-center gap-2 text-sm text-gray-600">
-                                                🐾 {{ $booking->pet_type }}
+                                                <span class="w-5 h-5 rounded-md bg-white border border-sky-100 inline-flex items-center justify-center overflow-hidden flex-shrink-0 p-0.5">
+                                                    <img src="{{ asset('images/logo-paw.png') }}" alt="Ikon Hewan" class="w-full h-full object-contain scale-[1.65]">
+                                                </span>
+                                                {{ $booking->pet_type }}
                                             </span>
                                         </td>
 
@@ -413,6 +406,87 @@
                     </div>
                 </div>
             </section>
+
+            {{-- HUBUNGI KAMI --}}
+            <section id="hubungi-kami" class="scroll-mt-24 space-y-6 max-w-5xl mx-auto">
+                <div class="text-center max-w-xl mx-auto">
+                    <span class="text-xs font-extrabold text-sky-600 uppercase tracking-[0.2em]">
+                        Contact Us
+                    </span>
+                    <h3 class="text-2xl font-black text-gray-900 mt-1">
+                        Hubungi Kami
+                    </h3>
+                    <p class="text-sm text-gray-500 mt-2">
+                        
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-[2rem] border border-sky-100 shadow-sm overflow-hidden">
+                    <div class="h-2 bg-gradient-to-r from-sky-400 via-blue-500 to-indigo-500"></div>
+
+                    <div class="p-6 sm:p-8">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+
+                            {{-- NAMA TOKO --}}
+                            <div class="p-5 rounded-2xl bg-gradient-to-br from-sky-50/70 to-white border border-sky-100 hover:border-sky-300 transition flex items-start gap-4">
+                                <div class="w-12 h-12 rounded-2xl bg-white border border-sky-100 shadow-sm flex items-center justify-center flex-shrink-0 overflow-hidden p-1">
+                                    <img src="{{ asset('images/logo-paw.png') }}" alt="Logo Toko" class="w-full h-full object-contain scale-[1.65]">
+                                </div>
+                                <div>
+                                    <p class="text-[11px] font-extrabold text-sky-600 uppercase tracking-wider">Nama Toko</p>
+                                    <h4 class="font-extrabold text-gray-900 text-base mt-1">Pet Grooming Care</h4>
+                                    <p class="text-xs text-gray-500 mt-1 leading-5">Layanan Perawatan & Spa Anabul Terpercaya</p>
+                                </div>
+                            </div>
+
+                            {{-- ALAMAT --}}
+                            <div class="p-5 rounded-2xl bg-gradient-to-br from-sky-50/70 to-white border border-sky-100 hover:border-sky-300 transition flex items-start gap-4">
+                                <div class="w-12 h-12 rounded-2xl bg-sky-100 text-sky-700 flex items-center justify-center text-xl flex-shrink-0">
+                                    📍
+                                </div>
+                                <div>
+                                    <p class="text-[11px] font-extrabold text-sky-600 uppercase tracking-wider">Alamat Toko</p>
+                                    <h4 class="font-extrabold text-gray-900 text-sm mt-1 leading-6">
+                                        Jl. Raya Melati No. 123, Bekasi
+                                    </h4>
+                                    <p class="text-xs text-gray-500 mt-1">Buka Setiap Hari: 08.00 – 20.00 WIB</p>
+                                </div>
+                            </div>
+
+                            {{-- NO. TELEPON / WHATSAPP --}}
+                            <a href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer"
+                               class="group p-5 rounded-2xl bg-gradient-to-br from-sky-50/70 to-white border border-sky-100 hover:border-emerald-300 hover:shadow-md transition flex items-start gap-4">
+                                <div class="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center text-xl flex-shrink-0 group-hover:scale-110 transition">
+                                    📞
+                                </div>
+                                <div>
+                                    <p class="text-[11px] font-extrabold text-emerald-600 uppercase tracking-wider">Telepon / WhatsApp</p>
+                                    <h4 class="font-extrabold text-gray-900 text-base mt-1 group-hover:text-emerald-700 transition">
+                                        +62 812-3456-7890
+                                    </h4>
+                                    <p class="text-xs text-gray-500 mt-1">Klik untuk chat langsung via WhatsApp →</p>
+                                </div>
+                            </a>
+
+                            {{-- INSTAGRAM --}}
+                            <a href="https://instagram.com/petgrooming.id" target="_blank" rel="noopener noreferrer"
+                               class="group p-5 rounded-2xl bg-gradient-to-br from-sky-50/70 to-white border border-sky-100 hover:border-pink-300 hover:shadow-md transition flex items-start gap-4">
+                                <div class="w-12 h-12 rounded-2xl bg-pink-100 text-pink-600 flex items-center justify-center text-xl flex-shrink-0 group-hover:scale-110 transition">
+                                    📸
+                                </div>
+                                <div>
+                                    <p class="text-[11px] font-extrabold text-pink-600 uppercase tracking-wider">Instagram</p>
+                                    <h4 class="font-extrabold text-gray-900 text-base mt-1 group-hover:text-pink-600 transition">
+                                        @petgrooming.id
+                                    </h4>
+                                    <p class="text-xs text-gray-500 mt-1">Lihat hasil grooming & promo terbaru →</p>
+                                </div>
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
 
         {{-- MODAL BOOKING --}}
@@ -471,7 +545,6 @@
                         >
                     </div>
 
-                    <!-- TAMBAHKAN INPUT EMAIL INI -->
                     <div>
                         <label class="block text-xs font-extrabold text-gray-600 uppercase tracking-wider mb-2">
                             Email Customer

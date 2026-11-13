@@ -13,80 +13,46 @@
         <div class="relative w-full max-w-5xl bg-white/90 backdrop-blur-xl rounded-[2rem] shadow-[0_25px_80px_-20px_rgba(14,116,144,0.25)] overflow-hidden border border-white grid grid-cols-1 md:grid-cols-2">
 
             {{-- LEFT PANEL --}}
-            <div class="relative hidden md:flex flex-col justify-between min-h-[750px] bg-gradient-to-br from-sky-500 via-blue-600 to-indigo-700 p-12 text-white overflow-hidden">
+<div class="relative hidden md:flex flex-col justify-between min-h-[650px] bg-gradient-to-br from-sky-500 via-blue-600 to-indigo-700 p-12 text-white overflow-hidden">
 
-                <div class="absolute -top-20 -right-20 w-72 h-72 border-[40px] border-white/10 rounded-full"></div>
-                <div class="absolute bottom-20 -left-24 w-72 h-72 border-[35px] border-white/10 rounded-full"></div>
-                <div class="absolute top-1/2 right-0 w-40 h-40 bg-cyan-300/20 rounded-full blur-3xl"></div>
+    {{-- Decorative Circles --}}
+    <div class="absolute -top-20 -right-20 w-72 h-72 border-[40px] border-white/10 rounded-full"></div>
+    <div class="absolute bottom-20 -left-24 w-72 h-72 border-[35px] border-white/10 rounded-full"></div>
+    <div class="absolute top-1/2 right-0 w-40 h-40 bg-cyan-300/20 rounded-full blur-3xl"></div>
 
-                {{-- Brand --}}
-                <div class="relative z-10 flex items-center gap-4">
-                    <div class="w-14 h-14 flex items-center justify-center bg-white/20 backdrop-blur-lg rounded-2xl text-3xl shadow-lg border border-white/20">
-                        🐾
-                    </div>
-                    <div>
-                        <h1 class="font-extrabold text-xl tracking-wide">Pet Grooming</h1>
-                        <p class="text-xs text-sky-100 tracking-widest uppercase mt-1">
-                            Professional Care App
-                        </p>
-                    </div>
-                </div>
+    {{-- BRAND / LOGO --}}
+    <div class="relative z-15 flex flex-col items-center text-center mx-auto pt-4">
+        <div class="w-28 h-28 flex items-center justify-center bg-white rounded-[2.25rem] shadow-2xl shadow-sky-900/25 border border-white/80 mb-4 transform transition hover:scale-105 duration-300 overflow-hidden">
+            <img src="{{ asset('images/logo-paw.png') }}" alt="Logo Pet Grooming" class="w-full h-full object-contain scale-[1.75]">
+        </div>
+        <h1 class="font-black text-2xl tracking-tight text-white">Pet Grooming</h1>
+        <p class="text-[11px] text-sky-100 tracking-[0.25em] uppercase font-bold mt-1">Professional Care App</p>
+    </div>
 
-                {{-- Hero Content --}}
-                <div class="relative z-10 my-auto py-12">
+    {{-- Hero Content --}}
+    <div class="relative z-10 my-auto py-8 text-center">
+        <span class="inline-flex items-center gap-2 px-4 py-2 bg-white/15 backdrop-blur-md rounded-full text-xs font-bold tracking-wide border border-white/20 mb-6">
+            <span class="w-2 h-2 bg-green-300 rounded-full animate-pulse"></span>
+            BERGABUNG BERSAMA KAMI
+        </span>
 
-                    <span class="inline-flex items-center gap-2 px-4 py-2 bg-white/15 backdrop-blur-md rounded-full text-xs font-bold tracking-wide border border-white/20 mb-7">
-                        <span class="w-2 h-2 bg-green-300 rounded-full animate-pulse"></span>
-                        JOIN OUR COMMUNITY
-                    </span>
+        <h2 class="text-3xl lg:text-4xl font-black tracking-tight leading-[1.2]">
+            Mulai Perjalanan,
+            <span class="block text-cyan-200 mt-1">Berikan Yang Terbaik Untuk Anabul.</span>
+        </h2>
 
-                    <h2 class="text-4xl lg:text-5xl font-black tracking-tight leading-[1.2]">
-                        Mulai Perjalanan
-                        <span class="text-cyan-200">Perawatan</span>
-                        Anabul Anda.
-                    </h2>
+        <p class="text-sky-100 text-sm leading-7 mt-5 max-w-sm mx-auto">
+            Buat akun baru sekarang untuk menikmati kemudahan booking perawatan, memantau riwayat layanan, dan akses eksklusif lainnya.
+        </p>
+    </div>
 
-                    <p class="text-sky-100 text-sm leading-7 mt-6 max-w-sm">
-                        Buat akun sekarang dan nikmati kemudahan booking layanan grooming, spa, serta pemantauan pesanan hewan kesayangan Anda.
-                    </p>
-
-                    {{-- Features --}}
-                    <div class="space-y-4 mt-9">
-
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-xl bg-white/15 flex items-center justify-center text-lg">✂️</div>
-                            <div>
-                                <p class="text-sm font-bold">Professional Grooming</p>
-                                <p class="text-xs text-sky-100">Perawatan terbaik untuk anabul.</p>
-                            </div>
-                        </div>
-
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-xl bg-white/15 flex items-center justify-center text-lg">📅</div>
-                            <div>
-                                <p class="text-sm font-bold">Easy Booking</p>
-                                <p class="text-xs text-sky-100">Pesan jadwal dengan mudah.</p>
-                            </div>
-                        </div>
-
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-xl bg-white/15 flex items-center justify-center text-lg">💙</div>
-                            <div>
-                                <p class="text-sm font-bold">Best Pet Care</p>
-                                <p class="text-xs text-sky-100">Prioritas kenyamanan hewan Anda.</p>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-                {{-- Footer --}}
-                <div class="relative z-10 border-t border-white/20 pt-6">
-                    <p class="text-xs text-sky-100">
-                        © 2026 Pet Grooming Laravel. All rights reserved.
-                    </p>
-                </div>
-            </div>
+    {{-- Footer --}}
+    <div class="relative z-10 border-t border-white/20 pt-6 text-center">
+        <p class="text-xs text-sky-100">
+            © 2026 Pet Grooming. All rights reserved.
+        </p>
+    </div>
+</div>
 
             {{-- RIGHT PANEL --}}
             <div class="relative p-8 sm:p-10 lg:p-12 flex flex-col justify-center bg-white">
@@ -158,7 +124,7 @@
                             </span>
 
                             <input id="username" type="text" name="username" value="{{ old('username') }}" required autocomplete="username"
-                                placeholder="Buat username unik"
+                                placeholder="Buat username"
                                 class="w-full pl-12 pr-4 py-3.5 rounded-2xl border border-gray-200 bg-gray-50 text-sm text-gray-800 placeholder-gray-400 outline-none transition duration-300 focus:bg-white focus:border-sky-500 focus:ring-4 focus:ring-sky-100 hover:border-sky-300">
                         </div>
 

@@ -39,14 +39,16 @@
     <footer class="bg-white border-t border-sky-100 py-8 mt-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-2">
             <div class="flex items-center justify-center gap-2">
-                <span class="p-1.5 bg-sky-100 rounded-lg text-sm">🐾</span>
+                <div class="w-8 h-8 rounded-lg bg-white border border-sky-100 shadow-xs flex items-center justify-center overflow-hidden p-0.5">
+    <img src="{{ asset('images/logo-paw.png') }}" alt="Logo Pet Grooming" class="w-full h-full object-contain scale-[1.65]">
+</div>
                 <span class="font-extrabold text-sky-700 text-sm">Pet Grooming Service App</span>
             </div>
             <p class="text-xs text-gray-500">
                 Berikan perawatan terbaik dan penuh kasih sayang untuk hewan kesayangan Anda.
             </p>
             <p class="text-[11px] text-gray-400 pt-2">
-                © 2026 Pet Grooming Laravel. All rights reserved.
+                © 2026 Pet Grooming. All rights reserved.
             </p>
         </div>
     </footer>

@@ -1,10 +1,9 @@
-
 <x-app-layout>
     <x-slot name="header">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div class="flex items-center gap-3">
-                <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-sky-500 to-blue-600 flex items-center justify-center text-2xl shadow-lg shadow-sky-500/20">
-                    🛡️
+                <div class="w-11 h-11 rounded-2xl bg-white border border-sky-100 flex items-center justify-center shadow-lg shadow-sky-500/15 overflow-hidden">
+                    <img src="{{ asset('images/logo-paw.png') }}" alt="Logo Pet Grooming" class="w-full h-full object-contain scale-[1.65]">
                 </div>
                 <div>
                     <h2 class="font-extrabold text-xl sm:text-2xl text-gray-800 tracking-tight">
@@ -94,14 +93,16 @@
                     </div>
 
                     <div class="hidden md:flex relative flex-shrink-0">
-                        <div class="w-52 h-52 lg:w-60 lg:h-60 rounded-full bg-white/10 border border-white/20 backdrop-blur-md flex items-center justify-center shadow-2xl">
-                            <span class="text-8xl lg:text-9xl">🐶</span>
+                        <div class="w-52 h-52 lg:w-60 lg:h-60 rounded-full bg-white/10 border border-white/20 backdrop-blur-md flex items-center justify-center shadow-2xl overflow-hidden p-8">
+                            <div class="w-full h-full flex items-center justify-center transition duration-500 hover:scale-110 hover:rotate-6">
+                                <img src="{{ asset('images/logo-paw.png') }}" alt="Logo Pet Grooming" class="w-full h-full object-contain drop-shadow-2xl scale-[1.85]">
+                            </div>
                         </div>
-                        <div class="absolute -top-3 -right-3 bg-white rounded-2xl px-4 py-3 shadow-xl rotate-6 text-3xl">
-                            ⚙️
+                        <div class="absolute -top-3 -right-3 bg-white rounded-2xl p-2.5 shadow-xl rotate-6 w-12 h-12 flex items-center justify-center overflow-hidden">
+                            <img src="{{ asset('images/logo-paw.png') }}" alt="Logo Pet Grooming" class="w-full h-full object-contain scale-[1.65]">
                         </div>
-                        <div class="absolute -bottom-2 -left-4 bg-white rounded-2xl px-4 py-3 shadow-xl -rotate-6 text-3xl">
-                            🐾
+                        <div class="absolute -bottom-2 -left-4 w-14 h-14 bg-white rounded-2xl shadow-xl -rotate-6 flex items-center justify-center overflow-hidden p-1.5">
+                            <img src="{{ asset('images/logo-paw.png') }}" alt="Logo Pet Grooming" class="w-full h-full object-contain scale-[1.65]">
                         </div>
                     </div>
                 </div>
@@ -132,8 +133,8 @@
                             </h3>
                             <p class="text-xs text-sky-600 font-semibold mt-2">Paket Grooming</p>
                         </div>
-                        <div class="w-14 h-14 rounded-2xl bg-sky-100 flex items-center justify-center text-3xl">
-                            🐾
+                        <div class="w-14 h-14 rounded-2xl bg-white border border-sky-100 shadow-sm flex items-center justify-center overflow-hidden p-2">
+                            <img src="{{ asset('images/logo-paw.png') }}" alt="Logo Total Layanan" class="w-full h-full object-contain scale-[1.65]">
                         </div>
                     </div>
                 </div>
@@ -192,8 +193,8 @@
                 <div id="tambah-layanan" class="bg-white rounded-3xl p-6 sm:p-7 shadow-sm border border-sky-100 scroll-mt-24">
 
                     <div class="flex items-center gap-3 border-b border-gray-100 pb-5 mb-6">
-                        <div class="w-11 h-11 rounded-xl bg-sky-100 flex items-center justify-center text-xl">
-                            ➕
+                        <div class="w-11 h-11 rounded-xl bg-white border border-sky-100 shadow-sm flex items-center justify-center overflow-hidden p-1.5">
+                            <img src="{{ asset('images/logo-paw.png') }}" alt="Logo Tambah Layanan" class="w-full h-full object-contain scale-[1.65]">
                         </div>
                         <div>
                             <h3 class="font-extrabold text-gray-900">Tambah Layanan</h3>
@@ -260,7 +261,7 @@
                             type="submit"
                             class="w-full bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-600 hover:to-blue-700 text-white font-extrabold py-3.5 rounded-xl shadow-lg shadow-sky-500/20 transition hover:-translate-y-0.5 flex items-center justify-center gap-2"
                         >
-                            ✨ Simpan Layanan
+                             Simpan Layanan
                         </button>
                     </form>
                 </div>
@@ -283,74 +284,90 @@
                         </span>
                     </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 max-h-[620px] overflow-y-auto pr-1">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-h-[620px] overflow-y-auto pr-1">
 
                         @forelse($services ?? [] as $service)
-                            <div class="group p-5 rounded-2xl bg-gradient-to-br from-sky-50/70 to-white border border-sky-100 hover:border-sky-300 hover:shadow-lg hover:shadow-sky-500/10 transition-all duration-300 flex flex-col justify-between">
+                            <div class="group bg-white rounded-3xl border border-sky-100 shadow-sm hover:shadow-xl hover:shadow-sky-500/10 hover:border-sky-300 transition-all duration-300 overflow-hidden flex flex-col justify-between">
 
-                                <div>
-                                    <div class="flex justify-between items-start gap-3">
-                                        <div class="w-11 h-11 rounded-xl bg-white shadow-sm border border-sky-100 flex items-center justify-center text-2xl">
-                                            🐾
+                                {{-- Garis gradasi di atas kartu (menyamai dashboard customer) --}}
+                                <div class="h-2 bg-gradient-to-r from-sky-400 via-blue-500 to-indigo-500"></div>
+
+                                <div class="p-6 flex flex-col flex-1">
+                                    <div class="flex justify-between items-center mb-5">
+                                        <div class="w-14 h-14 rounded-2xl bg-white border border-sky-100 shadow-sm flex items-center justify-center group-hover:scale-110 transition overflow-hidden p-1.5">
+                                            <img src="{{ asset('images/logo-paw.png') }}" alt="Logo Paket Layanan" class="w-full h-full object-contain scale-[1.65]">
                                         </div>
 
-                                        <div class="flex gap-2">
-                                            <button
-                                                type="button"
-                                                @click="
-                                                    editModalOpen = true;
-                                                    editService.id = {{ $service->id }};
-                                                    editService.name = {{ Illuminate\Support\Js::from($service->title) }};
-                                                    editService.description = {{ Illuminate\Support\Js::from($service->description) }};
-                                                    editService.price = {{ Illuminate\Support\Js::from((string) $service->price) }};
-                                                    editService.duration = {{ Illuminate\Support\Js::from($service->duration ?? '') }};
-                                                "
-                                                class="px-3 py-2 rounded-lg bg-amber-50 hover:bg-amber-100 text-amber-700 border border-amber-200 text-xs font-bold transition"
-                                            >
-                                                ✏️ Edit
-                                            </button>
-
-                                            <form
-                                                action="{{ route('admin.services.destroy', $service->id) }}"
-                                                method="POST"
-                                                onsubmit="return confirm('Yakin ingin menghapus paket layanan ini?');"
-                                            >
-                                                @csrf
-                                                @method('DELETE')
-                                                <button
-                                                    type="submit"
-                                                    class="px-3 py-2 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-600 border border-rose-200 text-xs font-bold transition"
-                                                >
-                                                    🗑️
-                                                </button>
-                                            </form>
-                                        </div>
+                                        <span class="inline-flex items-center gap-1.5 text-xs font-bold text-sky-700 bg-sky-50 border border-sky-100 px-3 py-2 rounded-xl">
+                                            ⏱️ {{ $service->duration ?? '30 Menit' }}
+                                        </span>
                                     </div>
 
-                                    <h4 class="font-extrabold text-gray-900 text-base mt-4">
+                                    <h4 class="font-extrabold text-lg text-gray-900 group-hover:text-sky-700 transition">
                                         {{ $service->title }}
                                     </h4>
 
-                                    <p class="text-xs text-gray-500 mt-2 leading-5">
+                                    <p class="text-sm text-gray-500 mt-3 leading-6 flex-1">
                                         {{ $service->description }}
                                     </p>
-                                </div>
 
-                                <div class="mt-5 pt-4 border-t border-sky-100 flex justify-between items-center gap-2">
-                                    <span class="text-xs font-bold text-sky-700 bg-sky-100 px-3 py-2 rounded-lg">
-                                        ⏱️ {{ $service->duration ?? '-' }}
-                                    </span>
+                                    <div class="mt-6 pt-5 border-t border-gray-100">
+                                        <p class="text-[10px] font-extrabold uppercase tracking-widest text-gray-400">
+                                            Harga Mulai Dari
+                                        </p>
 
-                                    <span class="font-black text-gray-900 text-sm">
-                                        Rp {{ number_format($service->price, 0, ',', '.') }}
-                                    </span>
+                                        <div class="flex items-center justify-between gap-3 mt-1">
+                                            <div>
+                                                <span class="text-xl font-black text-sky-700">
+                                                    Rp {{ number_format($service->price, 0, ',', '.') }}
+                                                </span>
+                                            </div>
+
+                                            <div class="flex items-center gap-2">
+                                                <button
+                                                    type="button"
+                                                    @click="
+                                                        editModalOpen = true;
+                                                        editService.id = {{ $service->id }};
+                                                        editService.name = {{ Illuminate\Support\Js::from($service->title) }};
+                                                        editService.description = {{ Illuminate\Support\Js::from($service->description) }};
+                                                        editService.price = {{ Illuminate\Support\Js::from((string) $service->price) }};
+                                                        editService.duration = {{ Illuminate\Support\Js::from($service->duration ?? '') }};
+                                                    "
+                                                    class="inline-flex items-center gap-1 bg-amber-50 hover:bg-amber-100 text-amber-700 border border-amber-200 text-xs font-extrabold px-3.5 py-2.5 rounded-xl transition"
+                                                >
+                                                    ✏️ Edit
+                                                </button>
+
+                                                <form
+                                                    action="{{ route('admin.services.destroy', $service->id) }}"
+                                                    method="POST"
+                                                    onsubmit="return confirm('Yakin ingin menghapus paket layanan ini?');"
+                                                >
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button
+                                                        type="submit"
+                                                        class="inline-flex items-center justify-center bg-rose-50 hover:bg-rose-100 text-rose-600 border border-rose-200 text-xs font-extrabold p-2.5 rounded-xl transition"
+                                                        title="Hapus Layanan"
+                                                    >
+                                                        🗑️
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         @empty
-                            <div class="col-span-full text-center py-14 bg-gray-50 rounded-2xl border border-dashed border-gray-200">
-                                <div class="text-4xl mb-3">📦</div>
-                                <p class="font-bold text-gray-700">Belum Ada Layanan</p>
-                                <p class="text-xs text-gray-400 mt-1">Tambahkan paket grooming pertama Anda.</p>
+                            <div class="col-span-full text-center py-16 bg-white rounded-3xl border border-dashed border-sky-200">
+                                <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-white border border-sky-100 shadow-sm flex items-center justify-center overflow-hidden">
+                                    <img src="{{ asset('images/logo-paw.png') }}" alt="Logo Kosong" class="w-full h-full object-contain scale-[1.65]">
+                                </div>
+                                <h4 class="font-bold text-gray-700">Belum Ada Paket Layanan</h4>
+                                <p class="text-sm text-gray-400 mt-2">
+                                    Paket grooming belum tersedia saat ini.
+                                </p>
                             </div>
                         @endforelse
 
@@ -412,8 +429,11 @@
                                         <p class="font-bold text-sky-700 text-sm">
                                             {{ $booking->service->title ?? 'Layanan' }}
                                         </p>
-                                        <p class="text-xs text-gray-500 mt-1">
-                                            🐾 {{ $booking->pet_type }}
+                                        <p class="text-xs text-gray-500 mt-1 flex items-center gap-1.5">
+                                            <span class="w-4 h-4 rounded-sm bg-white border border-sky-100 inline-flex items-center justify-center overflow-hidden flex-shrink-0">
+                                                <img src="{{ asset('images/logo-paw.png') }}" alt="Ikon Hewan" class="w-full h-full object-contain scale-[1.65]">
+                                            </span>
+                                            {{ $booking->pet_type }}
                                         </p>
                                     </td>
 

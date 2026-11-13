@@ -5,7 +5,9 @@
                 <!-- Logo / Brand -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}" class="flex items-center gap-2.5">
-                        <span class="p-2 bg-sky-100 rounded-xl text-xl shadow-xs">🐾</span>
+                        <div class="w-10 h-10 rounded-xl bg-white border border-sky-100 shadow-sm flex items-center justify-center overflow-hidden p-1">
+                            <img src="{{ asset('images/logo-paw.png') }}" alt="Logo Pet Grooming" class="w-full h-full object-contain scale-[1.65]">
+                        </div>
                         <span class="font-extrabold text-sky-700 tracking-tight text-base">Pet Grooming</span>
                     </a>
                 </div>
